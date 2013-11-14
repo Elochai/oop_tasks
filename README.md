@@ -1,0 +1,1 @@
+Hometask solution for 2nd lecture about OOP in Ruby

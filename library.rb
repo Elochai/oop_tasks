@@ -59,44 +59,26 @@ class Library
 	end
 
 	def one_of_three
-		index3 = 0
-		books_popularity = []
-		readers = []
-		i = 0
-		match = ''
-		@books.each do |book|
-			popularity = 0
-			@orders.each do |order|
-				popularity += 1 if order[:book_title] == book[:book_title]
-				reader_name = order[:reader_name]					
-			end
-			books_popularity << { book_title: book[:title], popularity: popularity}
-		end 
-		books_popularity.sort_by 
-		books_popularity.each_with_index do |book, index|
-			unless index > 2
-					@orders.each_with_index do |order, index2|
-				 		if order[:book_title] == book[:book_title]
-		 	 	 	  end
-		 	 	 	end
-		 	end
-	  end
-			puts "#{readers.uniq} often takes "
+		count = 0
+    top3 = @books_popularity.first(3)
+    random_book = top3[rand(3)][:book_title]
+    @orders.each do |order|
+    	count += 1 if order[:book_title] == random_book
+    end
+			puts "#{count} reader(s) often takes '#{random_book}'"
 	end
 
 	def popular_book
-		books_popularity = []
-		reader_name = []
+		@books_popularity = []
 		@books.each do |book|
 			popularity = 0
 			@orders.each do |order|
 				popularity += 1 if order[:book_title] == book[:title]						
 			end
-			books_popularity << { book_title: book[:title], popularity: popularity}
+			@books_popularity << { book_title: book[:title], popularity: popularity}
 		end 
-		books_popularity.sort_by 
-		puts "The most popular book is '#{books_popularity[0][:book_title]}'"
-		puts books_popularity
+		@books_popularity.sort_by 
+		puts "The most popular book is '#{@books_popularity[0][:book_title]}'"
 	end
 
 end
